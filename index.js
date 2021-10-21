@@ -1,4 +1,4 @@
-export default function(context){
-    console.log(context);
-    return 'Working'
-}
+module.exports.handler = function (context) {
+  console.log(context);
+  return "Working";
+};
