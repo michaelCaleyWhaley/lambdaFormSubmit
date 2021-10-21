@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: "14"
       - run: npm ci
-      - run: zip -r lambdaFunc.zip index.js node_modules
+      - run: zip -r lambdaFunc.zip .
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
