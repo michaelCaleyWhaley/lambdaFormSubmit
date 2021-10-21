@@ -2,13 +2,14 @@ const nodemailer = require("nodemailer");
 
 const emailDestOptions = { default: "kneedeepwater@hotmail.com" };
 
+// eslint-disable-next-line no-unused-vars
 exports.handler = async (event, context) => {
   const { name, email, telephone, inquiry, emailDest } = event;
   if ((!name, !email, !telephone, !inquiry, !emailDestOptions[emailDest])) {
     return "Incomplete details";
   }
 
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     secure: true,
     port: 465,
