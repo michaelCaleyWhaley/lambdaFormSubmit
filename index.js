@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
 const emailDestOptions = { default: "kneedeepwater@hotmail.com" };
 
