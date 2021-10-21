@@ -1,4 +1,7 @@
 # lambdaFormSubmit
 Serverless function which submits information to an email api. Written with the intention of being hosted on AWS lambda
 
-Documentation for AWS actions can be found [Here](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-function-code.html)
+## Deployment
+Function is deployed on merge to master via github actions.
+
+Documentation for AWS cli docs (used to deploy) can be found [Here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html#cli-aws)
