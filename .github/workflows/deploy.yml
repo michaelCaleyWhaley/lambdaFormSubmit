@@ -19,4 +19,4 @@ jobs:
           aws-region: eu-west-2
       - run: echo $GITHUB_WORKSPACE
       - run: echo fileb://$GITHUB_WORKSPACE
-      - run: aws lambda update-function-code --function-name  formSubmitter --zip-file fileb://$GITHUB_WORKSPACE/lambdaFormSubmit/index.zip
+      - run: aws lambda update-function-code --function-name  formSubmitter --zip-file fileb://$GITHUB_WORKSPACE/index.zip
