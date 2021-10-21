@@ -26,5 +26,8 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.20.3",
     "prettier": "^2.3.0"
+  },
+  "dependencies": {
+    "nodemailer": "^6.7.0"
   }
 }

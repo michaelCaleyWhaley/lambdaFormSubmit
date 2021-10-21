@@ -1,6 +1,36 @@
+import nodemailer from "nodemailer";
+
+const emailDestOptions = { default: "kneedeepwater@hotmail.com" };
+
 exports.handler = async (event, context) => {
-  console.log("value1 =", event.key1);
-  console.log("value2 =", event.key2);
-  console.log("value3 =", event.key3);
-  return 'hello world';
+  const { name, email, telephone, inquiry, emailDest } = event;
+  if ((!name, !email, !telephone, !inquiry, !emailDest)) {
+    return "Incomplete details";
+  }
+
+  return "Complete details";
+
+  // let transporter = nodemailer.createTransport({
+  //   host: process.env.EMAIL_HOST,
+  //   secure: true,
+  //   port: 465,
+  //   auth: {
+  //     user: process.env.EMAIL_USER,
+  //     pass: process.env.EMAIL_KEY,
+  //   },
+  // });
+
+  // const mailOptions = {
+  //   from: process.env.EMAIL_USER,
+  //   to: emailDest,
+  //   subject: "webComments",
+  //   html: `${name} ${email} ${telephone} ${inquiry}`,
+  // };
+
+  // try {
+  //   const response = await transporter.sendMail(mailOptions);
+  //   res.send({ response });
+  // } catch (e) {
+  //   res.send({ e });
+  // }
 };
