@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "14"
-      - run: npm ci
+      - run: npm install --only=prod
       - run: zip -r lambdaFunc.zip .
       - uses: aws-actions/configure-aws-credentials@v1
         with:
