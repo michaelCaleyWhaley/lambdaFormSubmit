@@ -1,9 +1,16 @@
 const nodemailer = require("nodemailer");
+const {
+  accessControlAllowOrigins,
+} = require("./helpers/accessControlAllowOrigins");
 
 const emailDestOptions = { default: "kneedeepwater@hotmail.com" };
 
-// event, context
-exports.handler = async (event = {}) => {
+exports.handler = async (event = {}, context) => {
+  if (event.headers) {
+    accessControlAllowOrigins(event, context);
+    return;
+  }
+
   const { name, email, telephone, inquiry, emailDest } = event;
   if ((!name, !email, !telephone, !inquiry, !emailDestOptions[emailDest])) {
     return "Incomplete details";
