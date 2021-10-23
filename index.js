@@ -35,4 +35,4 @@ const handler = async (event, context) => {
   // return response;
 };
 
-export { handler };
+exports = { handler };
