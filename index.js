@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const emailDestOptions = { default: "kneedeepwater@hotmail.com" };
 
 // eslint-disable-next-line no-unused-vars
-const handler = async (event, context) => {
+exports.handler = async (event, context) => {
   console.log(`nodemailer: `, nodemailer);
 
   return JSON.stringify({ test: "hello" });
@@ -34,5 +34,3 @@ const handler = async (event, context) => {
 
   // return response;
 };
-
-exports = { handler };
