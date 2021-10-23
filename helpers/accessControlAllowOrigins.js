@@ -1,23 +1,19 @@
-// const allowedOrigins = [
-//   "http://localhost:3000",
-//   "https://d2zxlr302pg8t9.cloudfront.net",
-// ];
-
 const allowedOrigins = [
-  "https://www.google.com",
+  "http://localhost:3000",
+  "https://d2zxlr302pg8t9.cloudfront.net",
 ];
 
 function accessControlAllowOrigins(event, context) {
   const origin = event.headers.Origin || event.headers.origin;
   let goodOrigin = false;
 
-  if (origin) {
-    allowedOrigins.forEach((allowedOrigin) => {
-      if (!goodOrigin && origin.match(allowedOrigin)) {
-        goodOrigin = true;
-      }
-    });
-  }
+  if (!origin) return;
+
+  allowedOrigins.forEach((allowedOrigin) => {
+    if (!goodOrigin && origin.match(allowedOrigin)) {
+      goodOrigin = true;
+    }
+  });
 
   context.succeed({
     headers: {
