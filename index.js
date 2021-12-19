@@ -28,7 +28,7 @@ exports.handler = async (event = {}, context) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: validEmailRecipient,
-    subject: "webComments",
+    subject: "lambda webComments",
     html: `${name} ${email} ${telephone} ${inquiry}`,
   };
   const response = await transporter.sendMail(mailOptions);
