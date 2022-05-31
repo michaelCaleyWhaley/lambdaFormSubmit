@@ -1,7 +1,8 @@
 const allowedOrigins = [
   "http://localhost:3000",
   "https://d2zxlr302pg8t9.cloudfront.net",
-  "https://www.easykool.co.uk"
+  "https://www.easykool.co.uk",
+  "https://www.caltechairconditioning.co.uk"
 ];
 
 function accessControlAllowOrigins(event, context) {
