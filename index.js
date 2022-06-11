@@ -2,10 +2,7 @@ const nodemailer = require("nodemailer");
 const {
   accessControlAllowOrigins,
 } = require("./helpers/accessControlAllowOrigins");
-
-const emailDestOptions = {
-  default: { destination: "kneedeepwater@hotmail.com", signature: "EasyKool" },
-};
+const { emailDestOptions } = require("./constants");
 
 exports.handler = async (event = {}, context) => {
   if (event.headers) {
@@ -13,8 +10,6 @@ exports.handler = async (event = {}, context) => {
     accessControlAllowOrigins(event, context);
     return;
   }
-
-  console.log(`context: `, context);
 
   const { name, email, telephone, inquiry, emailDest } = event;
   if ((!name, !email, !telephone, !inquiry, !emailDestOptions[emailDest])) {
@@ -33,6 +28,7 @@ exports.handler = async (event = {}, context) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: destination,
+    cc: "caleymichael@outlook.com",
     subject: `${signature} webComments`,
     html: `${name} ${email} ${telephone} ${inquiry}`,
   };

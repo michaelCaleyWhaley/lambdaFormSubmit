@@ -7,13 +7,13 @@ const details = {
   name: "michael",
   email: "kneedeepwater@hotmail.com",
   telephone: "0776770889",
-  inquiry: "hello",
+  inquiry: "Test email form",
   emailDest: "default",
 };
 
 describe("email submissions", () => {
   describe("and the details are incomplete", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
       handlerResult = await handler();
     });
 
@@ -23,13 +23,14 @@ describe("email submissions", () => {
   });
 
   describe("when details are complete", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
       handlerResult = await handler(details);
     });
 
     it("should respond with destination email", () => {
       expect(handlerResult.accepted).toStrictEqual([
-        emailDestOptions[details.emailDest],
+        "kneedeepwater@hotmail.com",
+        "caleymichael@outlook.com",
       ]);
     });
   });
