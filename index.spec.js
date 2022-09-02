@@ -1,5 +1,19 @@
+// eslint-disable-next-line node/no-unpublished-require
 require("dotenv").config();
-const { handler, emailDestOptions } = require("./index");
+const nodemailer = require("nodemailer");
+const { handler } = require("./index");
+
+jest.mock("nodemailer", () => ({
+  createTransport: jest.fn(() => ({
+    sendMail: jest.fn((mailOptions) => {
+      // console.log("mailOptions: ", mailOptions);
+      const { to, cc } = mailOptions;
+      return {
+        accepted: [to, cc],
+      };
+    }),
+  })),
+}));
 
 let handlerResult;
 
@@ -8,12 +22,12 @@ const details = {
   email: "kneedeepwater@hotmail.com",
   telephone: "0776770889",
   inquiry: "Test email form",
-  emailDest: "default",
+  emailDest: "caltech",
 };
 
 describe("email submissions", () => {
   describe("and the details are incomplete", () => {
-    beforeAll(async () => {
+    beforeEach(async () => {
       handlerResult = await handler();
     });
 
@@ -29,9 +43,21 @@ describe("email submissions", () => {
 
     it("should respond with destination email", () => {
       expect(handlerResult.accepted).toStrictEqual([
-        "kneedeepwater@hotmail.com",
+        "info@caltechairconditioning.co.uk",
         "caleymichael@outlook.com",
       ]);
+    });
+  });
+
+  describe("when inquiry contains banned keywords", () => {
+    beforeAll(async () => {
+      handlerResult = await handler({ ...details, inquiry: "search engine" });
+    });
+
+    it("should send email to developer email only", () => {
+      expect(handlerResult).toStrictEqual({
+        accepted: ["kneedeepwater@hotmail.com", "caleymichael@outlook.com"],
+      });
     });
   });
 });

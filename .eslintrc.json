@@ -1,19 +1,19 @@
 {
-  "env": {
-    "node": true,
-    "jest/globals": true
-  },
-  "extends": ["airbnb", "prettier"],
-  "settings": { "react": { "version": "detect" } },
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "ignorePatterns": ["node_modules/", ".next/", "out/"],
-  "plugins": ["react", "prettier", "compat"],
+  "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+  "plugins": ["prettier", "jest"],
   "rules": {
     "prettier/prettier": "error",
-    "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
-    "jsx-a11y/anchor-is-valid": "off",
-    "import/prefer-default-export": "off"
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "func-names": "off",
+    "no-process-exit": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off"
+  },
+  "env": {
+    "jest/globals": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }

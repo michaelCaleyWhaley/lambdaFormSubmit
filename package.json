@@ -8,6 +8,9 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/michaelCaleyWhaley/lambdaFormSubmit.git"
@@ -20,16 +23,19 @@
   "homepage": "https://github.com/michaelCaleyWhaley/lambdaFormSubmit#readme",
   "devDependencies": {
     "dotenv": "^10.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-compat": "^3.13.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.20.3",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.0.1",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^27.3.1",
-    "prettier": "^2.3.0"
+    "prettier": "^2.7.1"
   },
   "dependencies": {
     "nodemailer": "^6.7.0"
