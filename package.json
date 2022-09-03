@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./index.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepare": "husky install"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -34,6 +35,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
     "jest": "^27.3.1",
     "prettier": "^2.7.1"
   },

@@ -40,5 +40,3 @@ exports.handler = async (event = {}, context) => {
   const response = await transporter.sendMail(mailOptions);
   return response;
 };
-
-exports.emailDestOptions = emailDestOptions;
