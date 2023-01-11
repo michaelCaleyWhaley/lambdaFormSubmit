@@ -34,7 +34,7 @@ exports.handler = async (event = {}, context) => {
     from: process.env.EMAIL_USER,
     to: hasBannedWords ? "kneedeepwater@hotmail.com" : destination,
     cc: "caleymichael@outlook.com",
-    subject: `${signature} webComments`,
+    subject: `${signature} webComments${hasBannedWords && ' hasBannedWords'}`,
     html: `${name} ${email} ${telephone} ${inquiry}`,
   };
   const response = await transporter.sendMail(mailOptions);
