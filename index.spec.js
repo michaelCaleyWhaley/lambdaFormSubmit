@@ -1,17 +1,18 @@
 // eslint-disable-next-line node/no-unpublished-require
 require("dotenv").config();
-const nodemailer = require("nodemailer");
+
 const { handler } = require("./index");
+
+const mockSendMail = jest.fn((mailOptions) => {
+  const { to, cc } = mailOptions;
+  return {
+    accepted: [to, cc],
+  };
+});
 
 jest.mock("nodemailer", () => ({
   createTransport: jest.fn(() => ({
-    sendMail: jest.fn((mailOptions) => {
-      // console.log("mailOptions: ", mailOptions);
-      const { to, cc } = mailOptions;
-      return {
-        accepted: [to, cc],
-      };
-    }),
+    sendMail: mockSendMail,
   })),
 }));
 
@@ -22,6 +23,14 @@ const details = {
   email: "kneedeepwater@hotmail.com",
   telephone: "0776770889",
   inquiry: "Test email form",
+  emailDest: "caltech",
+};
+
+const bannedWordsDetails = {
+  name: "michael",
+  email: "kneedeepwater@hotmail.com",
+  telephone: "0776770889",
+  inquiry: "seo",
   emailDest: "caltech",
 };
 
@@ -37,7 +46,7 @@ describe("email submissions", () => {
   });
 
   describe("when details are complete", () => {
-    beforeAll(async () => {
+    beforeEach(async () => {
       handlerResult = await handler(details);
     });
 
@@ -46,6 +55,16 @@ describe("email submissions", () => {
         "info@caltechairconditioning.co.uk",
         "caleymichael@outlook.com",
       ]);
+    });
+
+    it("should call sendMail with mailOptions", () => {
+      expect(mockSendMail).toHaveBeenCalledWith({
+        cc: "caleymichael@outlook.com",
+        from: "webcomments@caltechairconditioning.co.uk",
+        html: "michael kneedeepwater@hotmail.com 0776770889 Test email form",
+        subject: "Caltech webComments",
+        to: "info@caltechairconditioning.co.uk",
+      });
     });
   });
 
@@ -57,6 +76,22 @@ describe("email submissions", () => {
     it("should send email to developer email only", () => {
       expect(handlerResult).toStrictEqual({
         accepted: ["kneedeepwater@hotmail.com", "caleymichael@outlook.com"],
+      });
+    });
+  });
+
+  describe("when query contains banned words", () => {
+    beforeEach(async () => {
+      handlerResult = await handler(bannedWordsDetails);
+    });
+
+    it("should append hasBannedWords to the subject and direct to kneedeep", () => {
+      expect(mockSendMail).toHaveBeenCalledWith({
+        cc: "caleymichael@outlook.com",
+        from: "webcomments@caltechairconditioning.co.uk",
+        html: "michael kneedeepwater@hotmail.com 0776770889 seo",
+        subject: "Caltech webComments hasBannedWords",
+        to: "kneedeepwater@hotmail.com",
       });
     });
   });
