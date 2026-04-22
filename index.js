@@ -57,7 +57,7 @@ exports.handler = async (event = {}, context) => {
     </tr>
     <tr>
       <td style="padding: 8px 0;">Telephone</td>
-      <td style="padding: 8px 0;"><a href="tel:${telephone}">${telephone}</a></td>
+      <td style="padding: 8px 0;">${telephone}</td>
     </tr>
     <tr>
       <td style="padding: 8px 0; vertical-align: top;">Inquiry</td>
