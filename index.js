@@ -13,8 +13,15 @@ exports.handler = async (event = {}, context) => {
     return null;
   }
 
-  const { name, email, telephone, inquiry, emailDest } = event;
-  if ((!name, !email, !telephone, !inquiry, !emailDestOptions[emailDest])) {
+  const { name, email, telephone, inquiry, trafficSource, emailDest } = event;
+  if (
+    (!name,
+    !email,
+    !telephone,
+    !inquiry,
+    !trafficSource,
+    !emailDestOptions[emailDest])
+  ) {
     return "Incomplete details";
   }
 
@@ -38,7 +45,57 @@ exports.handler = async (event = {}, context) => {
     subject: `${signature} webComments${
       hasBannedWords ? " hasBannedWords" : ""
     }`,
-    html: `${name} ${email} ${telephone} ${inquiry}`,
+    html: `
+  <table style="width: 100%; max-width: 600px;">
+    <tr>
+      <td style="padding: 8px 0; width: 120px;">Name</td>
+      <td style="padding: 8px 0;">${name}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px 0;">Email</td>
+      <td style="padding: 8px 0;">${email}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px 0;">Telephone</td>
+      <td style="padding: 8px 0;"><a href="tel:${telephone}">${telephone}</a></td>
+    </tr>
+    <tr>
+      <td style="padding: 8px 0; vertical-align: top;">Inquiry</td>
+      <td style="padding: 8px 0; white-space: pre-wrap;">${inquiry}</td>
+    </tr>
+    ${
+      trafficSource
+        ? `
+    <tr>
+      <td style="padding: 8px 0; vertical-align: top;">Traffic source</td>
+      <td style="padding: 8px 0;">
+        <table>
+          <tr>
+            <td style="padding: 2px 12px 2px 0;">Channel</td>
+            <td style="padding: 2px 0;">${trafficSource.channel}</td>
+          </tr>
+          <tr>
+            <td style="padding: 2px 12px 2px 0;">Source</td>
+            <td style="padding: 2px 0;">${trafficSource.source}</td>
+          </tr>
+          ${
+            trafficSource.campaign
+              ? `
+          <tr>
+            <td style="padding: 2px 12px 2px 0;">Campaign</td>
+            <td style="padding: 2px 0;">${trafficSource.campaign}</td>
+          </tr>
+          `
+              : ""
+          }
+        </table>
+      </td>
+    </tr>
+    `
+        : ""
+    }
+  </table>
+`,
   };
 
   const response = await transporter.sendMail(mailOptions);
