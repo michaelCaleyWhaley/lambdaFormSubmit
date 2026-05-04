@@ -2,6 +2,10 @@
 
 Serverless function which submits information to an email api. Written with the intention of being hosted on AWS lambda
 
+## Exposure
+
+Powers the Caltech and Easykool web forms.
+
 ## Deployment
 
 Function is deployed on merge to master via github actions.
